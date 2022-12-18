@@ -14,82 +14,115 @@
 
 
 <html>
-	<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-	font-family: Arial;
-	color: black;
-}
-
-</style>
-</head>
-<body>
-<div class="row">    <div class="col-xs-9">
+    	<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        #map {
-        height:600;
-        width:600;
-        }
+    body {
+    	font-family: Arial;
+    	color: black;
+        background-color:#90EE90;
+    }
+
     </style>
-    <div id="map">
-    <script>
-        var data = [{FirstName:"Викентий",LastName:"Осоргин","Patronimyc":"Эдгардович","Position":{"Lat":41.31066754055873,"Lng":69.25151870096235},"Target":null,"Home":null},{"FirstName":"Арианда","LastName":"Тюльпанова","Patronimyc":"Жоресовна","Position":{"Lat":41.312219320076885,"Lng":69.24172115067918},"Target":null,"Home":null},{"FirstName":"Поликарп","LastName":"Устинов","Patronimyc":"Денисович","Position":{"Lat":41.313386847444235,"Lng":69.25407230010033},"Target":null,"Home":null}]
-        var map = L.map('map', {
-            center: [41.319316, 69.246548],
-            zoom: 13
-        });
-        L.Routing.control ({
-            waypoints: [
-                L.latLng(41.319316, 69.246548),
-                L.latLng(41.31316, 69.276548)
-            ]
-        }).addTo(map);
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+              <div class="col-9" style= "background-color:#90EE90">
+                <style>
+                    #map {
+                        width: 75%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        right: 30%;
+                        left: 0;
+                    
+                        
+                    }
+                </style>
+                <div id="map">
+                <script>
+                    var data = [{FirstName:"Викентий",LastName:"Осоргин","Patronimyc":"Эдгардович","Position":{"Lat":41.31066754055873,"Lng":69.25151870096235},"Target":null,"Home":null},{"FirstName":"Арианда","LastName":"Тюльпанова","Patronimyc":"Жоресовна","Position":{"Lat":41.312219320076885,"Lng":69.24172115067918},"Target":null,"Home":null},{"FirstName":"Поликарп","LastName":"Устинов","Patronimyc":"Денисович","Position":{"Lat":41.313386847444235,"Lng":69.25407230010033},"Target":null,"Home":null}]
+                    var map = L.map('map', 
+                    {
+                        center: [41.319316, 69.246548],
+                        zoom: 13
+                    });
+                L.Routing.control ({
+                    waypoints: [
+                        L.latLng(41.319316, 69.246548),
+                        L.latLng(41.31316, 69.276548)
+                    ]
+                }).addTo(map);
+    
+                function onMapClick(e)	
+                {
+                    popup
+                    .setLatLng(e.latlng)
+                    .setContent("You clicked the map at " + e.latlng.toString())
+                    .openOn(map);
+                }
+                map.on('click', onMapClick);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', 
+                {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                </script>
+            </div>
+              </div>
+              <div class="col-sm" size = "fluid" style= "background-color:#90EE90">
+                
+                <div class="row-md-3 themed-grid-col" style = "font-size:30px"><span data-bind = "text: firstName"></span></div>
+                <div class="row-md-4 themed-grid-col">
+                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <p id="fooBar1"></p>
+
+                </div>
+                <div class="row-md-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: lastName"></span></div>
+                <div class="row-md-4 themed-grid-col">
+                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <p id="fooBar2"></p>
+                </div>
+
+                <div class="row-sm-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: thirdName"></span></div>
+                <div class="row-md-4 themed-grid-col">
+                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <p id="fooBar3"></p> 
+                </div>
+                <div class="row-md-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: lastName"></span></div>
+                <div class="row-md-4 themed-grid-col">
+                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <p id="fooBar4"></p>
+                </div>    
+                <div class="row-sm-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: thirdName"></span></div> 
+                <div class="row-md-4 themed-grid-col">
+                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <p id="fooBar5"></p>
+                </div>    
+
+            </div>
+    
+        </div>
+
         
-        function onMapClick(e)	
-        {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
-        }
-        map.on('click', onMapClick);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    </script>
-    </div>
-</div>
-<div class="col-xs-3">    
-    <div class="row-md-3 themed-grid-col" style = "font-size:30px"><span data-bind = "text: firstName"></span></div>
-    <div class="row-md-4 themed-grid-col">
-		  <input type="button" id="btnAdd" value="Add Text Field">
-			<p id="fooBar">Fields:</p></div>
-      <div class="row-md-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: lastName"></span></div>
-      <div class="row-sm-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: thirdName"></span></div> 
-    </div>
-</div>
-</div>
 
 
+        <script>
+	    var ViewModel = function(first, last,third) {
+        this.firstName = ko.observable(first);
+	    this.lastName = ko.observable(last);
+	    this.thirdName = ko.observable(third);
+        };	
+	    var fName,lName,tName;
 
-    <script>
-	var ViewModel = function(first, last,third) {
-	this.firstName = ko.observable(first);
-	this.lastName = ko.observable(last);
-	this.thirdName = ko.observable(third);
-    };	
-	var fName,lName,tName;
-
-	var fName = data[0].FirstName +" "+ data[0].LastName+" "+data[0].Patronimyc+" ";
-	var lName = data[1].FirstName +" "+ data[1].LastName+" "+data[1].Patronimyc+" ";
-	var tName = data[2].FirstName +" "+ data[2].LastName+" "+data[2].Patronimyc+" ";
- 
-    ko.applyBindings(new ViewModel(fName,lName,tName));
-    </script>
+	    var fName = data[0].FirstName +" "+ data[0].LastName+" "+data[0].Patronimyc+" ";
+	    var lName = data[1].FirstName +" "+ data[1].LastName+" "+data[1].Patronimyc+" ";
+	    var tName = data[2].FirstName +" "+ data[2].LastName+" "+data[2].Patronimyc+" ";
 
 
-
-
-</body></html>
+        ko.applyBindings(new ViewModel(fName,lName,tName));
+        </script>
+    </body>
+</html>
