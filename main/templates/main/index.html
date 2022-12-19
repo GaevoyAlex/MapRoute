@@ -49,12 +49,7 @@
                         center: [41.319316, 69.246548],
                         zoom: 13
                     });
-                L.Routing.control ({
-                    waypoints: [
-                        L.latLng(41.319316, 69.246548),
-                        L.latLng(41.31316, 69.276548)
-                    ]
-                }).addTo(map);
+                
     
                 function onMapClick(e)	
                 {
@@ -76,31 +71,114 @@
                 
                 <div class="row-md-3 themed-grid-col" style = "font-size:30px"><span data-bind = "text: firstName"></span></div>
                 <div class="row-md-4 themed-grid-col">
-                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <input type="button" id="btnAdd1" value="Маршрут" style= "background-color:#87CEEB">
                     <p id="fooBar1"></p>
+
+                    <script>
+                        var button = document.querySelector("#btnAdd1");
+                        function once() {
+                            
+                            L.Routing.control ({
+                                waypoints: [
+                                L.latLng(data[0].Position.Lat,data[0].Position.Lng),
+                                L.latLng(data[1].Position.Lat,data[1].Position.Lng)
+                                ]
+                            }).addTo(map);
+    
+                            button.removeEventListener("click", once);
+                                }
+                        button.addEventListener("click", once);
+                      </script>
+
 
                 </div>
                 <div class="row-md-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: lastName"></span></div>
                 <div class="row-md-4 themed-grid-col">
-                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <input type="button" id="btnAdd2" value="Маршрут" style= "background-color:#87CEEB">
                     <p id="fooBar2"></p>
                 </div>
 
+                <script>
+                    var button = document.querySelector("#btnAdd2");
+                    function once() {
+                        
+                        L.Routing.control ({
+                            waypoints: [
+                                L.latLng(data[2].Position.Lat,data[2].Position.Lng),
+                                L.latLng(data[3].Position.Lat,data[3].Position.Lng)
+                            ]
+                        }).addTo(map);
+
+                        button.removeEventListener("click", once);
+                            }
+                    button.addEventListener("click", once);
+                  </script>
+
                 <div class="row-sm-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: thirdName"></span></div>
                 <div class="row-md-4 themed-grid-col">
-                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <input type="button" id="btnAdd3" value="Маршрут" style= "background-color:#87CEEB">
                     <p id="fooBar3"></p> 
                 </div>
+
+                <script>
+                    var button = document.querySelector("#btnAdd3");
+                    function once() {
+                        
+                        L.Routing.control ({
+                            waypoints: [
+                                L.latLng(data[4].Position.Lat,data[4].Position.Lng),
+                                L.latLng(data[5].Position.Lat,data[5].Position.Lng)
+                            ]
+                        }).addTo(map);
+
+                        button.removeEventListener("click", once);
+                            }
+                    button.addEventListener("click", once);
+                  </script>
+
                 <div class="row-md-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: lastName"></span></div>
                 <div class="row-md-4 themed-grid-col">
-                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <input type="button" id="btnAdd4" value="Маршрут" style= "background-color:#87CEEB">
                     <p id="fooBar4"></p>
                 </div>    
+
+                <script>
+                    var button = document.querySelector("#btnAdd4");
+                    function once() {
+                        
+                        L.Routing.control ({
+                            waypoints: [
+                                L.latLng(data[6].Position.Lat,data[6].Position.Lng),
+                                L.latLng(data[7].Position.Lat,data[7].Position.Lng)
+                            ]
+                        }).addTo(map);
+
+                        button.removeEventListener("click", once);
+                            }
+                    button.addEventListener("click", once);
+                  </script>
+
                 <div class="row-sm-4 themed-grid-col" style = "font-size:30px"><span data-bind = "text: thirdName"></span></div> 
                 <div class="row-md-4 themed-grid-col">
-                    <input type="button" id="btnAdd" value="Маршрут" style= "background-color:#87CEEB">
+                    <input type="button" id="btnAdd5" value="Маршрут" style= "background-color:#87CEEB">
                     <p id="fooBar5"></p>
                 </div>    
+
+                <script>
+                    var button = document.querySelector("#btnAdd5");
+                    function once() {
+                        
+                        L.Routing.control ({
+                            waypoints: [
+                                L.latLng(data[8].Position.Lat,data[8].Position.Lng),
+                                L.latLng(data[9].Position.Lat,data[9].Position.Lng)
+                            ]
+                        }).addTo(map);
+
+                        button.removeEventListener("click", once);
+                            }
+                    button.addEventListener("click", once);
+                  </script>                
 
             </div>
     
