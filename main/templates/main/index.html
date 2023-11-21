@@ -20,15 +20,14 @@
     body {
     	font-family: Arial;
     	color: black;
-        background-color:#90EE90;
+        background-color:#fffefe;
     }
-
     </style>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
-              <div class="col-9" style= "background-color:#90EE90">
+              <div class="col-9" style= "background-color:#00ff04">
                 <style>
                     #map {
                         width: 75%;
@@ -36,21 +35,18 @@
                         position: absolute;
                         top: 0;
                         right: 30%;
-                        left: 0;
-                    
-                        
+                        left: 0; 
                     }
                 </style>
                 <div id="map">
                 <script>
-                    var data = [{FirstName:"Викентий",LastName:"Осоргин","Patronimyc":"Эдгардович","Position":{"Lat":41.31266754055873,"Lng":69.21251870096235},"Target":null,"Home":null},{"FirstName":"Арианда","LastName":"Тюльпанова","Patronimyc":"Жоресовна","Position":{"Lat":41.312219320076885,"Lng":69.24172115067918},"Target":null,"Home":null},{"FirstName":"Поликарп","LastName":"Устинов","Patronimyc":"Денисович","Position":{"Lat":41.313386847444235,"Lng":69.25407230010033},"Target":null,"Home":null}]
+                    var data = [{FirstName:"Викентий",LastName:"Осоргин","Patronimyc":"Эдгардович","Position":{"Lat":53.8866647823409,"Lng":27.55344641331685},"Target":null,"Home":null},{"FirstName":"Арианда","LastName":"Тюльпанова","Patronimyc":"Жоресовна","Position":{"Lat":53.88060267982916,"Lng": 27.552424500489423},"Target":null,"Home":null},{"FirstName":"Поликарп","LastName":"Устинов","Patronimyc":"Денисович","Position":{"Lat":41.313386847444235,"Lng":69.25407230010033},"Target":null,"Home":null}]
                     var map = L.map('map', 
                     {
-                        center: [41.319316, 69.246548],
+                        center: [53.89236994402279, 27.53801474355661],
                         zoom: 13
                     });
-                
-    
+
                 function onMapClick(e)	
                 {
                     popup
@@ -68,103 +64,78 @@
             </div>
               </div>
               <script></script>
-              <div class="col-sm" size = "fluid" style= "background-color:#90EE90">
+              <div class="col-sm" size = "fluid" style= "background-color:#ffffff">
+                <div class="row-md-3 themed-grid-col" style = "font-size:15px; font-weight:bold; text-align: start;margin-top: 5%; "><span data-bind = "text: firstName"></span></div>
+                <div class="row-md-4 themed-grid-col" style = "font-size:12px; font-style:italic; text-align: start; color:#000000;margin-top:1%;">Младший сын 7 леты </div>
                 
-                <div class="row-md-3 themed-grid-col" style = "font-size:30px"><span data-bind = "text: firstName"></span></div>
                 <div class="row-md-4 themed-grid-col">
-                    <input type="button" id="btnAdd1" value="Маршрут" style= "background-color:#87CEEB">
-                    <p id="fooBar1"></p>
+                  <input type="button" id="btnAdd1" value="Маршрут" style= "background-color:#48c2fa71; color:#000000; font-size:14px; border-radius:10px; box-shadow: 5px 5px 10px #888888; margin-left:3%;margin-top: 3%;">
+                  <p id="fooBar1"></p>
 
                     <script>
                         var button = document.querySelector("#btnAdd1");
                         function once() {
                             
-                            // Создаем переменную для хранения статической точки координат
-var staticPoint = L.latLng(data[0].Position.Lat,data[0].Position.Lng)
+                                            // Создаем переменную для хранения статической точки координат
+                var staticPoint = L.latLng(data[0].Position.Lat,data[0].Position.Lng)
 
-// Создаем переменную для хранения динамической точки координат
-var dynamicPoint = L.latLng(data[0].Position.Lat,data[0].Position.Lng);
+                // Создаем переменную для хранения динамической точки координат
+                var dynamicPoint = L.latLng(data[1].Position.Lat,data[1].Position.Lng);
 
-// Создаем маркеры на карте с этими точками координат
-var staticMarker = L.marker(staticPoint).addTo(map);
-var dynamicMarker = L.marker(dynamicPoint).addTo(map);
+                // Создаем маркеры на карте с этими точками координат
+                var staticMarker = L.marker(staticPoint).addTo(map);
+                var dynamicMarker = L.marker(dynamicPoint).addTo(map);
 
-// Создаем маршрут на карте с этими точками координат
-var route = L.Routing.control ({
-  waypoints: [
-    staticPoint,
-    dynamicPoint
-  ]
-}).addTo(map);
+                // Создаем маршрут на карте с этими точками координат
+                var route = L.Routing.control ({
+                  waypoints: [
+                    staticPoint,
+                    dynamicPoint
+                  ]
+                }).addTo(map);
 
-// Создаем функцию, которая будет случайным образом изменять координаты динамической точки в небольшом радиусе относительно статической точки
-function changePoint() {
-  // Генерируем случайный угол от 0 до 2π
-  var randomAngle = Math.random() * 2 * Math.PI;
-
-  // Генерируем случайную скорость от 0.0001 до 0.001
-  var randomSpeed = Math.random() * 0.00009 + 0.00001;
-
-  // Вычисляем смещение по широте и долготе на основе угла и скорости
-  var deltaLat = Math.sin(randomAngle) * randomSpeed;
-  var deltaLng = Math.cos(randomAngle) * randomSpeed;
-
-  // Прибавляем смещение к текущим координатам динамической точки
-  var newLat = dynamicPoint.lat + deltaLat;
-  var newLng = dynamicPoint.lng + deltaLng;
-
-  // Создаем новый объект L.latLng с новыми координатами
-  var newPoint = L.latLng(newLat, newLng);
-
-  // Вычисляем расстояние между новой и статической точкой в метрах
-  var distance = newPoint.distanceTo(staticPoint);
-
-  // Проверяем, не превышает ли расстояние максимального значения, например, 1000 метров
-  if (distance > 1000) {
-    // Если превышает, то отражаем новую точку относительно статической точки, чтобы она не уходила слишком далеко
-    var reflectLat = staticPoint.lat - (newLat - staticPoint.lat);
-    var reflectLng = staticPoint.lng - (newLng - staticPoint.lng);
-    // Создаем новый объект L.latLng с отраженными координатами
-    var reflectPoint = L.latLng(reflectLat, reflectLng);
-    // Обновляем переменную dynamicPoint с отраженной точкой
-    dynamicPoint = reflectPoint;
-  } else {
-    // Если не превышает, то обновляем переменную dynamicPoint с новой точкой
-    dynamicPoint = newPoint;
-  }
-
-  dynamicMarker.setLatLng(dynamicPoint);
-
-// Обновляем маршрут на карте с новой точкой
-route.setWaypoints([
-  staticPoint,
-  dynamicPoint
-]);
-}
-
-// Создаем интервал, который будет вызывать функцию changePoint каждую секунду
-var interval = setInterval(changePoint, 1000);
-
-    
-                            button.removeEventListener("click", once);
-                                }
-                        button.addEventListener("click", once);
-                      </script>
-
-
-                
-
-
-                
-                
-
-                
-                
-                
-                                
-
-            </div>
-    
+                // Создаем функцию, которая будет случайным образом изменять координаты динамической точки в небольшом радиусе относительно статической точки
+                function changePoint() {
+                  // Генерируем случайный угол от 0 до 2π
+                  var randomAngle = Math.random() * 2 * Math.PI;
+                  
+                  // Генерируем случайную скорость от 0.0001 до 0.001
+                  var randomSpeed = Math.random() * 0.00009 + 0.00001;
+                  // Вычисляем смещение по широте и долготе на основе угла и скорости
+                  var deltaLat = Math.sin(randomAngle) * randomSpeed;
+                  var deltaLng = Math.cos(randomAngle) * randomSpeed;
+                  // Прибавляем смещение к текущим координатам динамической точки
+                  var newLat = dynamicPoint.lat + deltaLat;
+                  var newLng = dynamicPoint.lng + deltaLng;
+                  // Создаем новый объект L.latLng с новыми координатами
+                  var newPoint = L.latLng(newLat, newLng);
+                  // Вычисляем расстояние между новой и статической точкой в метрах
+                  var distance = newPoint.distanceTo(staticPoint);
+                  
+                  if (distance > 1000) {
+                    // Если превышает, то отражаем новую точку относительно статической точки, чтобы она не уходила слишком далеко
+                    var reflectLat = staticPoint.lat - (newLat - staticPoint.lat);
+                    var reflectLng = staticPoint.lng - (newLng - staticPoint.lng);
+                    // Создаем новый объект L.latLng с отраженными координатами
+                    var reflectPoint = L.latLng(reflectLat, reflectLng);
+                    // Обновляем переменную dynamicPoint с отраженной точкой
+                    dynamicPoint = reflectPoint;
+                  } else {
+                    // Если не превышает, то обновляем переменную dynamicPoint с новой точкой
+                    dynamicPoint = newPoint;
+                  }
+                dynamicMarker.setLatLng(dynamicPoint);
+                route.setWaypoints([
+                  staticPoint,
+                  dynamicPoint
+                ]);
+                }
+                var interval = setInterval(changePoint, 1000);  
+                button.removeEventListener("click", once);
+                  }
+                button.addEventListener("click", once);
+              </script>
+          </div>
         </div>
 
         
